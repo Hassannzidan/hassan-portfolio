@@ -78,7 +78,7 @@ const Hero = () => {
         </div>
         
         <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-          I'm a fullstack developer specializing in the MERN stack, currently expanding my expertise into Java, OOP, and design patterns. I love creating efficient, scalable solutions that solve real-world problems.
+          I'm a fullstack developer specializing in the MEARN stack, currently expanding my expertise into Java, OOP, and design patterns. I love creating efficient, scalable solutions that solve real-world problems.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>

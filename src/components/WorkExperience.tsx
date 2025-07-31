@@ -9,21 +9,21 @@ const WorkExperience = () => {
 
   const experiences = [
     {
-      title: 'Frontend Developer',
-      company: 'TechCorp Solutions',
+      title: 'Programming Instructor',
+      company: 'iSchool',
       period: 'Jan 2023 - Present',
-      location: 'Remote',
+      location: 'Hybrid',
       description: [
         'Developed responsive web applications using React and TypeScript',
         'Collaborated with design teams to implement pixel-perfect UI components',
         'Optimized application performance resulting in 40% faster load times',
         'Mentored junior developers and conducted code reviews'
       ],
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js']
+      technologies: ['Ai', 'Python', 'Tailwind CSS', 'Node.js']
     },
     {
       title: 'Full Stack Developer',
-      company: 'StartupXYZ',
+      company: 'Information Technology Institute',
       period: 'Jun 2022 - Dec 2022',
       location: 'Cairo, Egypt',
       description: [

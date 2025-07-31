@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const Contact = () => {
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/hassanzidan', label: 'GitHub' },
+    { icon: Github, href: 'https://github.com/hassannzidan', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/hassanzidan', label: 'LinkedIn' },
     { icon: Twitter, href: 'https://twitter.com/hassanzidan', label: 'Twitter' }
   ];
