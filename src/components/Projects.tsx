@@ -24,26 +24,26 @@ const Projects = () => {
       github: "https://github.com",
       demo: "https://evenza-app.netlify.app/",
     },
-    // {
-    //   id: 3,
-    //   title: "Weather Analytics",
-    //   description:
-    //     "Real-time weather dashboard with data visualization and location-based forecasts. Integrates multiple weather APIs.",
-    //   tech: ["React", "Chart.js", "OpenWeather API", "Tailwind CSS"],
-    //   image: "/placeholder.svg",
-    //   github: "https://github.com",
-    //   demo: "https://demo.com",
-    // },
-    // {
-    //   id: 4,
-    //   title: "Social Media API",
-    //   description:
-    //     "RESTful API for social media platform with user authentication, posts, comments, and real-time notifications.",
-    //   tech: ["Node.js", "Express", "MongoDB", "JWT", "WebSocket"],
-    //   image: "/placeholder.svg",
-    //   github: "https://github.com",
-    //   demo: "https://docs.com",
-    // },
+    {
+      id: 3,
+      title: "Fawry E-Commerce (Java Swing)",
+      description:
+      "A simple Java-based e-commerce system developed as part of the Fawry Rise Journey Challenge.",
+      tech: ["Java", "NetBeans IDE", "Java Swing (UI)"],
+      image: "/assets/images/Fawry-Logo.png",
+      github: "https://github.com/Hassannzidan/fawry-ecommerce-java",
+      demo: "NO DEMO FOR THIS REPO",
+    },
+    {
+      id: 4,
+      title: "E-commerce Landing Page (Shopify)",
+      description:
+        "A fully custom E-commerce Shopify landing page designed with complete flexibility for store owners ",
+      tech: ["Liquid", "Java script", "HTML5", "CSS"],
+      image: "/assets/images/shopify.png",
+      github: "https://github.com/Hassannzidan/Hassan-Mohamed",
+      demo: "NO DEMO FOR THIS RE",
+    },
   ];
 
   return (
