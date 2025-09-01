@@ -44,6 +44,16 @@ const Projects = () => {
       github: "https://github.com/Hassannzidan/Hassan-Mohamed",
       demo: "NO DEMO FOR THIS RE",
     },
+    {
+      id: 5,
+      title: "Task Manager Mobile App",
+      description:
+        "A modern, feature-rich task management application built with React Native and Expo.",
+      tech: ["Node.js", "Expo CLI", "React Native", "CSS"],
+      image: "/assets/images/application-preview.png",
+      github: "https://github.com/Hassannzidan/Task-Manager",
+      demo: "https://www.figma.com/proto/MrOoIbkPFLE5lnRZwSGmlp/Task-Manager-Mobile-Application?node-id=1-3&t=EsQTE8HMng0S2jAR-1&utm_source=chatgpt.com",
+    },
   ];
 
   return (
