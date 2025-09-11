@@ -17,7 +17,7 @@ const ChatBot = () => {
   const [showWelcome, setShowWelcome] = useState(true);
 
   const predefinedQA = {
-    "What tech stack do you use?": "I primarily work with the MERN stack (MongoDB, Express.js, React, Node.js) along with TypeScript, Tailwind CSS, and various other modern web technologies.",
+    "What tech stack do you use?": "I primarily work with the MEARN stack (MongoDB, Express.js, React, Angular,Node.js) along with TypeScript, Tailwind CSS, and various other modern web technologies.",
     "What are you currently learning?": "I'm currently diving deep into Java development, object-oriented programming principles, and design patterns. Always expanding my skillset!",
     "What's your experience level?": "I'm a passionate fullstack developer with solid experience in building web applications. I've worked on various projects ranging from startups to established companies.",
     "Where are you located?": "I'm based in Cairo, Egypt, and I'm open to both remote and local opportunities.",
@@ -115,7 +115,7 @@ const ChatBot = () => {
       {isOpen && (
         <div className="fixed bottom-24 right-6 w-80 h-96 z-40 animate-fade-in">
           <Card className="h-full bg-card border-primary/20 shadow-xl flex flex-col">
-            <CardHeader className="pb-3 border-b border-border">
+            <CardHeader className="pb-3 border-b border-border flex-shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center">
                   <Bot className="w-5 h-5 text-primary" />
@@ -127,7 +127,7 @@ const ChatBot = () => {
               </div>
             </CardHeader>
 
-            <CardContent className="p-4 h-full flex flex-col">
+            <CardContent className="flex-1 flex flex-col min-h-0 p-4">
               {/* Messages */}
               <div className="flex-1 overflow-y-auto space-y-3 mb-4">
                 {messages.map((message) => (
