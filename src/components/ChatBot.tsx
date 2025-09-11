@@ -1,9 +1,13 @@
+import { useState, useEffect } from "react";
+import { MessageCircle, X, Bot } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-import { useState, useEffect } from 'react';
-import { MessageCircle, X, Send, Bot } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
+import Lottie from "lottie-react";
+// import LittleRobot from "@/assets/animations/little_power_robot.json";
+
+import LittleRobot from "../../public/assets/animations/little_power_robot.json";
 interface Message {
   id: string;
   text: string;
@@ -16,28 +20,41 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [showWelcome, setShowWelcome] = useState(true);
 
+  //feat: magnatic
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
   const predefinedQA = {
-    "What tech stack do you use?": "I primarily work with the MEARN stack (MongoDB, Express.js, React, Angular,Node.js) along with TypeScript, Tailwind CSS, and various other modern web technologies.",
-    "What are you currently learning?": "I'm currently diving deep into Java development, object-oriented programming principles, and design patterns. Always expanding my skillset!",
-    "What's your experience level?": "I'm a passionate fullstack developer with solid experience in building web applications. I've worked on various projects ranging from startups to established companies.",
-    "Where are you located?": "I'm based in Cairo, Egypt, and I'm open to both remote and local opportunities.",
-    "What kind of projects do you work on?": "I build fullstack web applications, focusing on creating beautiful user interfaces and robust backend systems. I love turning complex problems into simple, elegant solutions.",
-    "Are you available for freelance work?": "Yes! I'm always interested in exciting projects. Feel free to reach out through the contact section to discuss your needs.",
-    "What's your favorite programming language?": "JavaScript/TypeScript holds a special place in my heart, but I'm also really enjoying my journey with Java. Each language has its own beauty!",
-    "How do you stay updated with technology?": "I follow tech blogs, contribute to open-source projects, attend developer meetups, and constantly experiment with new technologies and frameworks.",
-    "What's your development philosophy?": "I believe in writing clean, maintainable code and creating user-centered solutions. Continuous learning and staying curious are key to growth.",
-    "How can I contact you?": "You can reach out to me through the contact section below, or connect with me on GitHub and LinkedIn. I'm always happy to chat about tech and opportunities!"
+    "What tech stack do you use?":
+      "I primarily work with the MEARN stack (MongoDB, Express.js, React, Angular,Node.js) along with TypeScript, Tailwind CSS, and various other modern web technologies.",
+    "What are you currently learning?":
+      "I'm currently diving deep into Java development, object-oriented programming principles, and design patterns. Always expanding my skillset!",
+    "What's your experience level?":
+      "I'm a passionate fullstack developer with solid experience in building web applications. I've worked on various projects ranging from startups to established companies.",
+    "Where are you located?":
+      "I'm based in Cairo, Egypt, and I'm open to both remote and local opportunities.",
+    "What kind of projects do you work on?":
+      "I build fullstack web applications, focusing on creating beautiful user interfaces and robust backend systems. I love turning complex problems into simple, elegant solutions.",
+    "Are you available for freelance work?":
+      "Yes! I'm always interested in exciting projects. Feel free to reach out through the contact section to discuss your needs.",
+    "What's your favorite programming language?":
+      "JavaScript/TypeScript holds a special place in my heart, but I'm also really enjoying my journey with Java. Each language has its own beauty!",
+    "How do you stay updated with technology?":
+      "I follow tech blogs, contribute to open-source projects, attend developer meetups, and constantly experiment with new technologies and frameworks.",
+    "What's your development philosophy?":
+      "I believe in writing clean, maintainable code and creating user-centered solutions. Continuous learning and staying curious are key to growth.",
+    "How can I contact you?":
+      "You can reach out to me through the contact section below, or connect with me on GitHub and LinkedIn. I'm always happy to chat about tech and opportunities!",
   };
 
   const quickQuestions = Object.keys(predefinedQA);
 
   useEffect(() => {
     // Show welcome popup after 3 seconds on first visit
-    const hasSeenWelcome = localStorage.getItem('chatbot-welcome-seen');
+    const hasSeenWelcome = localStorage.getItem("chatbot-welcome-seen");
     if (!hasSeenWelcome) {
       const timer = setTimeout(() => {
         setShowWelcome(true);
-        localStorage.setItem('chatbot-welcome-seen', 'true');
+        localStorage.setItem("chatbot-welcome-seen", "true");
       }, 3000);
       return () => clearTimeout(timer);
     }
@@ -48,9 +65,9 @@ const ChatBot = () => {
       id: Date.now().toString(),
       text,
       isBot,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
-    setMessages(prev => [...prev, newMessage]);
+    setMessages((prev) => [...prev, newMessage]);
   };
 
   const handleQuestionClick = (question: string) => {
@@ -65,8 +82,24 @@ const ChatBot = () => {
     setIsOpen(true);
     setShowWelcome(false);
     if (messages.length === 0) {
-      addMessage("Hi! I'm Hassan's AI assistant. Ask me anything about his skills, experience, or projects! 🤖", true);
+      addMessage(
+        "Hi! I'm Hassan's AI assistant. Ask me anything about his skills, experience, or projects! 🤖",
+        true
+      );
     }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - (rect.left + rect.width / 2); // فرق الماوس عن نص الزرار
+    const y = e.clientY - (rect.top + rect.height / 2);
+
+    // قلل القيمة عشان الحركة تبان خفيفة مش عنيفة
+    setOffset({ x: x * 0.2, y: y * 0.2 });
+  };
+
+  const handleMouseLeave = () => {
+    setOffset({ x: 0, y: 0 });
   };
 
   return (
@@ -79,7 +112,9 @@ const ChatBot = () => {
               <div className="flex items-start gap-3">
                 <Bot className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-medium mb-2">Hi! I'm Hassan's AI assistant 👋</p>
+                  <p className="text-sm font-medium mb-2">
+                    Hi! I'm Hassan's AI assistant 👋
+                  </p>
                   <p className="text-xs text-muted-foreground mb-3">
                     Ask me anything about his skills, experience, or projects!
                   </p>
@@ -87,9 +122,9 @@ const ChatBot = () => {
                     <Button size="sm" onClick={openChat} className="text-xs">
                       Start Chat
                     </Button>
-                    <Button 
-                      size="sm" 
-                      variant="ghost" 
+                    <Button
+                      size="sm"
+                      variant="ghost"
                       onClick={() => setShowWelcome(false)}
                       className="text-xs"
                     >
@@ -106,9 +141,34 @@ const ChatBot = () => {
       {/* Floating Chat Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full shadow-lg z-50 hover:scale-110 transition-all duration-200"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className={`fixed bottom-6 right-6 rounded-full shadow-lg z-50 transition-all duration-200 overflow-hidden
+    ${isOpen
+        ? "w-14 h-14 hover:scale-110"
+        : "w-14 h-14 hover:w-16 hover:h-20 hover:scale-110"
+    }`}
+        style={{
+          transform: `translate(${offset.x}px, ${offset.y}px) scale(1.05)`,
+          transition: "transform 0.15s ease-out",
+        }}
       >
-        {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+        {isOpen ? (
+          <X className="w-6 h-6" />
+        ) : (
+          // <Lottie
+          //   animationData={LittleRobot}
+          //   loop={true}
+          //   style={{ width: 60, height: 60 }} // ← هنا تتحكم في الحجم
+          // />
+          <div className="w-36  h-24">
+            <Lottie
+              animationData={LittleRobot}
+              loop={true}
+              className="w-20 h-24"
+            />
+          </div>
+        )}
       </Button>
 
       {/* Chat Interface */}
@@ -122,7 +182,9 @@ const ChatBot = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">Hassan's Assistant</h3>
-                  <p className="text-xs text-muted-foreground">Ask me anything!</p>
+                  <p className="text-xs text-muted-foreground">
+                    Ask me anything!
+                  </p>
                 </div>
               </div>
             </CardHeader>
@@ -133,13 +195,15 @@ const ChatBot = () => {
                 {messages.map((message) => (
                   <div
                     key={message.id}
-                    className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
+                    className={`flex ${
+                      message.isBot ? "justify-start" : "justify-end"
+                    }`}
                   >
                     <div
                       className={`max-w-[80%] p-3 rounded-lg text-sm ${
                         message.isBot
-                          ? 'bg-muted text-foreground'
-                          : 'bg-primary text-primary-foreground'
+                          ? "bg-muted text-foreground"
+                          : "bg-primary text-primary-foreground"
                       }`}
                     >
                       {message.text}
