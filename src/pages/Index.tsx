@@ -1,11 +1,10 @@
-
-import Hero from '@/components/Hero';
-import About from '@/components/About';
-import WorkExperience from '@/components/WorkExperience';
-import Projects from '@/components/Projects';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
-import ChatBot from '@/components/ChatBot';
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import WorkExperience from "@/components/WorkExperience";
+import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import ChatBot from "@/components/ChatBot";
 
 const Index = () => {
   return (
@@ -14,9 +13,11 @@ const Index = () => {
       <About />
       <WorkExperience />
       <Projects />
+
+      {/* 
       <Contact />
       <Footer />
-      <ChatBot />
+      <ChatBot /> */}
     </div>
   );
 };
