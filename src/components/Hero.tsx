@@ -1,39 +1,15 @@
 import { Terminal, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import { heroCommands, heroCopy } from "@/data/hero";
 
 const Hero = () => {
   const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
 
-  // const commands = [
-  //   'npm install dreams --save',
-  //   'mongo.connect("career")',
-  //   'const me = new Developer("Hassan")',
-  //   'git commit -m "First job soon"',
-  //   'java -jar my-journey.jar',
-  //   'System.out.println("Keep shipping.")',
-  //   'cd /experience/frontend/react',
-  //   'code .',
-  //   'echo "I turn ideas into UI"',
-  //   'export PATH="$SELF_LEARNING/bin:$PATH"'
-  // ];
-  const commands = [
-    "npm install creativity --save",
-    'mongo.connect("big-dreams")',
-    'const me = new Developer("Hassan 🚀")',
-    'git commit -m "Crafting the future"',
-    "java -jar passion.jar",
-    'System.out.println("Code. Push. Grow.");',
-    "cd /projects/frontend/magic-react",
-    "code . && npm start achieving",
-    'echo "Turning caffeine into UI ✨"',
-    'export PATH="$IMAGINATION/bin:$PATH"',
-  ];
-
   useEffect(() => {
-    const currentCommand = commands[currentCommandIndex];
+    const currentCommand = heroCommands[currentCommandIndex];
     let timeoutId: NodeJS.Timeout;
 
     if (isTyping) {
@@ -49,13 +25,13 @@ const Hero = () => {
     } else {
       timeoutId = setTimeout(() => {
         setDisplayedText("");
-        setCurrentCommandIndex((prev) => (prev + 1) % commands.length);
+        setCurrentCommandIndex((prev) => (prev + 1) % heroCommands.length);
         setIsTyping(true);
       }, 500);
     }
 
     return () => clearTimeout(timeoutId);
-  }, [displayedText, isTyping, currentCommandIndex, commands]);
+  }, [displayedText, isTyping, currentCommandIndex]);
 
   const scrollToProjects = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -68,7 +44,7 @@ const Hero = () => {
           <Terminal className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
           <div className="text-left flex-1">
             <div className="text-muted-foreground mb-1">
-              <span className="text-primary">hassan@portfolio</span>:~$
+              <span className="text-primary">{heroCopy.promptLabel}</span>:~$
             </div>
             <div className="text-foreground min-h-[1.25rem]">
               {displayedText}
@@ -78,9 +54,9 @@ const Hero = () => {
         </div>
 
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in-up">
-          <span className="text-foreground">Hi, I'm </span>
+          <span className="text-foreground">{heroCopy.headlineLead}</span>
           <span className="text-primary font-mono text-shadow-glow">
-            Hassan
+            {heroCopy.headlineName}
           </span>
         </h1>
 
@@ -89,7 +65,7 @@ const Hero = () => {
           style={{ animationDelay: "0.2s" }}
         >
           <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-4">
-            I build fullstack web apps.
+            {heroCopy.tagline}
           </p>
         </div>
 
@@ -97,13 +73,10 @@ const Hero = () => {
           className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in-up"
           style={{ animationDelay: "0.4s" }}
         >
-          I'm a fullstack developer specializing in the MEARN stack, passionate
-          about turning ideas into scalable, real-world digital products. My
-          approach focuses on clean code, innovative solutions, and balancing
-          both user experience and business needs.
+          {heroCopy.bio}
           <br/>
           <br/>
-          ✨ Let’s connect and build something impactful together! ✨
+          {heroCopy.bioClosing}
         </p>
 
         <div
@@ -115,7 +88,7 @@ const Hero = () => {
             size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-mono px-8 py-3 border-glow transition-all duration-300 hover:scale-105"
           >
-            View My Work
+            {heroCopy.ctaPrimary}
           </Button>
           <Button
             variant="outline"
@@ -127,7 +100,7 @@ const Hero = () => {
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            Say Hello
+            {heroCopy.ctaSecondary}
           </Button>
         </div>
 
