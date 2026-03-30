@@ -2,52 +2,11 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronRight, Calendar, MapPin } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { workExperiences, workExperienceSection } from '@/data/workExperience';
 
 const WorkExperience = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [expandedMobile, setExpandedMobile] = useState<number | null>(null);
-
-  const experiences = [
-    {
-      title: 'Programming Instructor',
-      company: 'iSchool',
-      period: 'Jan 2023 - Present',
-      location: 'Hybrid',
-      description: [
-        'Developed responsive web applications using React and TypeScript',
-        'Collaborated with design teams to implement pixel-perfect UI components',
-        'Optimized application performance resulting in 40% faster load times',
-        'Mentored junior developers and conducted code reviews'
-      ],
-      technologies: ['Ai', 'Python', 'Tailwind CSS', 'Node.js']
-    },
-    {
-      title: 'Full Stack Developer',
-      company: 'Information Technology Institute',
-      period: 'Jun 2022 - Dec 2022',
-      location: 'Cairo, Egypt',
-      description: [
-        'Built and maintained MERN stack applications from scratch',
-        'Implemented RESTful APIs and database design with MongoDB',
-        'Worked closely with product team to define feature requirements',
-        'Deployed applications using Docker and AWS services'
-      ],
-      technologies: ['MongoDB', 'Express.js', 'React', 'Node.js', 'AWS']
-    },
-    {
-      title: 'Junior Web Developer',
-      company: 'Digital Agency Co',
-      period: 'Jan 2022 - May 2022',
-      location: 'Cairo, Egypt',
-      description: [
-        'Developed client websites using modern web technologies',
-        'Collaborated with designers to create responsive layouts',
-        'Maintained and updated existing web applications',
-        'Learned agile development methodologies and version control'
-      ],
-      technologies: ['HTML', 'CSS', 'JavaScript', 'WordPress', 'Git']
-    }
-  ];
 
   const toggleMobileExpansion = (index: number) => {
     setExpandedMobile(expandedMobile === index ? null : index);
@@ -57,12 +16,13 @@ const WorkExperience = () => {
     <section id="experience" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold font-mono mb-12 text-center">
-          <span className="text-primary">02.</span> Work Experience
+          <span className="text-primary">{workExperienceSection.sectionNumber}</span>{' '}
+          {workExperienceSection.title}
         </h2>
 
         {/* Mobile Layout - Collapsible Cards */}
         <div className="md:hidden space-y-4">
-          {experiences.map((exp, index) => (
+          {workExperiences.map((exp, index) => (
             <Card key={index} className="bg-card/50 border-border hover:border-primary/20 transition-all duration-300">
               <CardContent className="p-0">
                 <button
@@ -120,7 +80,7 @@ const WorkExperience = () => {
         <div className="hidden md:flex gap-8">
           {/* Tab Navigation */}
           <div className="flex flex-col">
-            {experiences.map((exp, index) => (
+            {workExperiences.map((exp, index) => (
               <button
                 key={index}
                 onClick={() => setActiveTab(index)}
@@ -142,23 +102,23 @@ const WorkExperience = () => {
               <CardContent className="p-8">
                 <div className="mb-6">
                   <h3 className="text-2xl font-semibold mb-2">
-                    {experiences[activeTab].title}{' '}
-                    <span className="text-primary">@ {experiences[activeTab].company}</span>
+                    {workExperiences[activeTab].title}{' '}
+                    <span className="text-primary">@ {workExperiences[activeTab].company}</span>
                   </h3>
                   <div className="flex items-center gap-6 text-sm text-muted-foreground">
                     <span className="flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
-                      {experiences[activeTab].period}
+                      {workExperiences[activeTab].period}
                     </span>
                     <span className="flex items-center gap-2">
                       <MapPin className="w-4 h-4" />
-                      {experiences[activeTab].location}
+                      {workExperiences[activeTab].location}
                     </span>
                   </div>
                 </div>
 
                 <ul className="space-y-3 mb-6">
-                  {experiences[activeTab].description.map((item, i) => (
+                  {workExperiences[activeTab].description.map((item, i) => (
                     <li key={i} className="text-muted-foreground flex items-start gap-3">
                       <span className="text-primary mt-1 text-sm">▸</span>
                       {item}
@@ -167,7 +127,7 @@ const WorkExperience = () => {
                 </ul>
 
                 <div className="flex flex-wrap gap-3">
-                  {experiences[activeTab].technologies.map((tech) => (
+                  {workExperiences[activeTab].technologies.map((tech) => (
                     <span
                       key={tech}
                       className="px-4 py-2 bg-primary/10 text-primary text-sm rounded-lg font-mono hover:bg-primary/20 transition-colors duration-200"
