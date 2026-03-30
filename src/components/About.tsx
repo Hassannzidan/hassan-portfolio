@@ -1,32 +1,26 @@
 
-import { Code, Database, Server, Smartphone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import {
+  aboutSection,
+  aboutBio,
+  aboutCurrentStack,
+  aboutLearningGoals,
+} from '@/data/about';
 
 const About = () => {
-  const currentStack = [
-    'MongoDB', 'Express.js', 'React', 'Node.js', 'JavaScript', 'TypeScript', 'HTML/CSS', 'Git'
-  ];
-
-  const learningGoals = [
-    { icon: Code, title: 'Java Development', description: 'Mastering Java fundamentals and enterprise patterns' },
-    { icon: Database, title: 'Design Patterns', description: 'Implementing OOP principles and architectural patterns' },
-    { icon: Server, title: 'Backend Architecture', description: 'Building scalable and maintainable server solutions' },
-    { icon: Smartphone, title: 'Mobile Development', description: 'Exploring React Native and mobile-first approaches' }
-  ];
-
   return (
     <section id="about" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="mb-16">
           <h2 className="text-3xl md:text-4xl font-bold font-mono mb-8 text-center">
-            <span className="text-primary">01.</span> About Me
+            <span className="text-primary">{aboutSection.sectionNumber}</span> {aboutSection.title}
           </h2>
           
           {/* Code-styled Bio */}
           <div className="bg-card/30 border border-border rounded-lg p-6 mb-8 font-mono text-sm">
             <div className="flex items-center gap-2 mb-4 text-muted-foreground">
               <span className="text-primary">/*</span>
-              <span>About Hassan Zidan</span>
+              <span>{aboutSection.codeBlockTitle}</span>
               <span className="text-primary">*/</span>
             </div>
             
@@ -38,9 +32,12 @@ const About = () => {
                 <span className="text-green-400">`</span>
               </div>
               <div className="pl-4 text-green-400">
-                I'm a passionate fullstack developer with a strong foundation in the MERN stack.<br/>
-                I enjoy turning complex problems into simple, beautiful solutions that provide<br/>
-                great user experiences.
+                {aboutBio.introLines.map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < aboutBio.introLines.length - 1 && <br />}
+                  </span>
+                ))}
               </div>
               <div className="text-green-400">`;</div>
               
@@ -51,9 +48,12 @@ const About = () => {
                 <span className="text-green-400">`</span>
               </div>
               <div className="pl-4 text-green-400">
-                Currently, I'm expanding my skillset by diving deep into Java development,<br/>
-                object-oriented programming principles, and design patterns. I believe in<br/>
-                continuous learning and staying updated with the latest technologies and best practices.
+                {aboutBio.currentlyLearningLines.map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < aboutBio.currentlyLearningLines.length - 1 && <br />}
+                  </span>
+                ))}
               </div>
               <div className="text-green-400">`;</div>
               
@@ -64,14 +64,17 @@ const About = () => {
                 <span className="text-green-400">`</span>
               </div>
               <div className="pl-4 text-green-400">
-                When I'm not coding, you'll find me exploring new technologies,<br/>
-                contributing to open-source projects, or sharing my knowledge with<br/>
-                the developer community.
+                {aboutBio.whenNotCodingLines.map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < aboutBio.whenNotCodingLines.length - 1 && <br />}
+                  </span>
+                ))}
               </div>
               <div className="text-green-400">`;</div>
               
               <div className="pt-4 text-purple-400">
-                // Always learning, always growing 🚀
+                {aboutBio.footerComment}
               </div>
             </div>
           </div>
@@ -79,11 +82,11 @@ const About = () => {
 
         <div className="mb-16">
           <h3 className="text-2xl font-bold font-mono mb-8 text-center">
-            <span className="text-primary">//</span> Current Tech Stack
+            <span className="text-primary">{aboutSection.stackComment}</span> {aboutSection.stackHeading}
           </h3>
           
           <div className="flex flex-wrap gap-3 justify-center">
-            {currentStack.map((tech, index) => (
+            {aboutCurrentStack.map((tech, index) => (
               <span
                 key={tech}
                 className="px-4 py-2 bg-card border border-border rounded-lg font-mono text-sm hover:border-primary/40 transition-all duration-300 hover:bg-primary/10"
@@ -97,11 +100,11 @@ const About = () => {
 
         <div>
           <h3 className="text-2xl font-bold font-mono mb-8 text-center">
-            <span className="text-primary">//</span> Learning Goals
+            <span className="text-primary">{aboutSection.goalsComment}</span> {aboutSection.goalsHeading}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {learningGoals.map((goal, index) => (
+            {aboutLearningGoals.map((goal) => (
               <Card key={goal.title} className="bg-card/50 border-border hover:border-primary/20 transition-all duration-300 hover:bg-card/70">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
