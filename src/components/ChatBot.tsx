@@ -5,15 +5,18 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 
 import Lottie from "lottie-react";
-// import LittleRobot from "@/assets/animations/little_power_robot.json";
 
 import LittleRobot from "../../public/assets/animations/little_power_robot.json";
+import { chatbotPredefinedQA, chatbotUi } from "@/data/chatbot";
+
 interface Message {
   id: string;
   text: string;
   isBot: boolean;
   timestamp: Date;
 }
+
+const quickQuestions = Object.keys(chatbotPredefinedQA);
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,31 +25,6 @@ const ChatBot = () => {
 
   //feat: magnatic
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-
-  const predefinedQA = {
-    "What tech stack do you use?":
-      "I primarily work with the MEARN stack (MongoDB, Express.js, React, Angular,Node.js) along with TypeScript, Tailwind CSS, and various other modern web technologies.",
-    "What are you currently learning?":
-      "I'm currently diving deep into Java development, object-oriented programming principles, and design patterns. Always expanding my skillset!",
-    "What's your experience level?":
-      "I'm a passionate fullstack developer with solid experience in building web applications. I've worked on various projects ranging from startups to established companies.",
-    "Where are you located?":
-      "I'm based in Cairo, Egypt, and I'm open to both remote and local opportunities.",
-    "What kind of projects do you work on?":
-      "I build fullstack web applications, focusing on creating beautiful user interfaces and robust backend systems. I love turning complex problems into simple, elegant solutions.",
-    "Are you available for freelance work?":
-      "Yes! I'm always interested in exciting projects. Feel free to reach out through the contact section to discuss your needs.",
-    "What's your favorite programming language?":
-      "JavaScript/TypeScript holds a special place in my heart, but I'm also really enjoying my journey with Java. Each language has its own beauty!",
-    "How do you stay updated with technology?":
-      "I follow tech blogs, contribute to open-source projects, attend developer meetups, and constantly experiment with new technologies and frameworks.",
-    "What's your development philosophy?":
-      "I believe in writing clean, maintainable code and creating user-centered solutions. Continuous learning and staying curious are key to growth.",
-    "How can I contact you?":
-      "You can reach out to me through the contact section below, or connect with me on GitHub and LinkedIn. I'm always happy to chat about tech and opportunities!",
-  };
-
-  const quickQuestions = Object.keys(predefinedQA);
 
   useEffect(() => {
     // Show welcome popup after 3 seconds on first visit
@@ -73,7 +51,7 @@ const ChatBot = () => {
   const handleQuestionClick = (question: string) => {
     addMessage(question, false);
     setTimeout(() => {
-      addMessage(predefinedQA[question as keyof typeof predefinedQA], true);
+      addMessage(chatbotPredefinedQA[question] ?? "", true);
     }, 1000);
     setShowWelcome(false);
   };
@@ -82,10 +60,7 @@ const ChatBot = () => {
     setIsOpen(true);
     setShowWelcome(false);
     if (messages.length === 0) {
-      addMessage(
-        "Hi! I'm Hassan's AI assistant. Ask me anything about his skills, experience, or projects! 🤖",
-        true
-      );
+      addMessage(chatbotUi.initialBotMessage, true);
     }
   };
 
@@ -113,14 +88,14 @@ const ChatBot = () => {
                 <Bot className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm font-medium mb-2">
-                    Hi! I'm Hassan's AI assistant 👋
+                    {chatbotUi.welcomePopupTitle}
                   </p>
                   <p className="text-xs text-muted-foreground mb-3">
-                    Ask me anything about his skills, experience, or projects!
+                    {chatbotUi.welcomePopupSubtitle}
                   </p>
                   <div className="flex gap-2">
                     <Button size="sm" onClick={openChat} className="text-xs">
-                      Start Chat
+                      {chatbotUi.startChat}
                     </Button>
                     <Button
                       size="sm"
@@ -128,7 +103,7 @@ const ChatBot = () => {
                       onClick={() => setShowWelcome(false)}
                       className="text-xs"
                     >
-                      Later
+                      {chatbotUi.later}
                     </Button>
                   </div>
                 </div>
@@ -156,11 +131,6 @@ const ChatBot = () => {
         {isOpen ? (
           <X className="w-6 h-6" />
         ) : (
-          // <Lottie
-          //   animationData={LittleRobot}
-          //   loop={true}
-          //   style={{ width: 60, height: 60 }} // ← هنا تتحكم في الحجم
-          // />
           <div className="w-36  h-24">
             <Lottie
               animationData={LittleRobot}
@@ -181,9 +151,9 @@ const ChatBot = () => {
                   <Bot className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-sm">Hassan's Assistant</h3>
+                  <h3 className="font-semibold text-sm">{chatbotUi.headerTitle}</h3>
                   <p className="text-xs text-muted-foreground">
-                    Ask me anything!
+                    {chatbotUi.headerSubtitle}
                   </p>
                 </div>
               </div>
@@ -216,7 +186,7 @@ const ChatBot = () => {
               {showWelcome && messages.length <= 1 && (
                 <div className="mb-4">
                   <p className="text-xs text-muted-foreground mb-2 font-mono">
-                    // Popular questions:
+                    {chatbotUi.popularQuestionsLabel}
                   </p>
                   <div className="space-y-2">
                     {quickQuestions.slice(0, 3).map((question) => (
